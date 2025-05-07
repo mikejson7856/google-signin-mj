@@ -1,9 +1,14 @@
 "use client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 function Signin() {
   const [email, setEmail] = useState();
+  const router = useRouter();
+  const handleEmail = () => {
+    router.push("/password");
+  };
   return (
     <div className=" w-full min-h-screen flex flex-col justify-center items-center">
       <div className="flex flex-col max-w-md  h-screen p-10 justify-between">
@@ -38,7 +43,7 @@ function Signin() {
                 type="email"
                 id="email"
                 className={`w-full border  border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500`}
-                placeholder="Email or phone"
+                placeholder="Enter Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -57,6 +62,7 @@ function Signin() {
         <div className="flex justify-end">
           <button
             className="w-fit  bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-600 font-semibold"
+            onClick={() => handleEmail()}
           >
             Next
           </button>
