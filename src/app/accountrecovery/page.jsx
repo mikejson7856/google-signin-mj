@@ -24,7 +24,7 @@ function page() {
               </p>
             </div>
           </div>
-          <div className="flex flex-col gap-2 ">
+          <div className="flex flex-col gap-4 ">
             <p className="text-4xl text-center font-bold">27</p>
             <p className="font-semibold">Open the Gmail app on Phone</p>
             <p className="font-medium">Google sent a notification to your Phone. Open the Gmail app, tap <span className="font-bold">Yes</span> on the prompt, then tap <span className="font-bold">27</span> on your phone to verify it's you.</p>
