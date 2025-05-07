@@ -3,11 +3,11 @@ import React from "react";
 
 function page() {
   return (
-    <div className=" w-full min-h-screen flex flex-col justify-center items-center">
+    <div className="w-full min-h-screen flex flex-col justify-center items-center ">
       <div className="flex flex-col w-full max-w-md p-10 h-screen  justify-between ">
         <div className="flex flex-col gap-6 ">
           <div className="flex flex-col  gap-3">
-            <div className="">
+            <div>
               <Image
                 src={"/logo.png"}
                 alt="logo"
@@ -27,16 +27,20 @@ function page() {
           <div className="flex flex-col gap-4 ">
             <p className="text-4xl text-center font-bold">27</p>
             <p className="font-semibold">Open the Gmail app on Phone</p>
-            <p className="font-medium">Google sent a notification to your Phone. Open the Gmail app, tap <span className="font-bold">Yes</span> on the prompt, then tap <span className="font-bold">27</span> on your phone to verify it's you.</p>
+            <p className="font-medium">
+              Google sent a notification to your Phone. Open the Gmail app, tap{" "}
+              <span className="font-bold">Yes</span> on the prompt, then tap{" "}
+              <span className="font-bold">27</span> on your phone to verify it's
+              you.
+            </p>
           </div>
-          <div className="text-blue-500 font-semibold">
-            Resend it
-          </div>
+          <div className="text-blue-500 font-semibold">Resend it</div>
         </div>
         <div className="flex justify-start text-sm font-bold text-blue-500">
           I don't have my phone
         </div>
       </div>
+      
     </div>
   );
 }

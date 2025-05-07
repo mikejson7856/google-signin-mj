@@ -5,7 +5,7 @@ import { ChevronDown } from 'lucide-react';
 
 function AccountVerify() {
   return (
-    <div className=" w-full min-h-screen flex flex-col justify-center items-center">
+    <div className=" w-full min-h-screen flex flex-col justify-center items-center relative">
       <div className="flex flex-col w-full max-w-md p-10 h-screen  justify-between ">
         <div className="flex flex-col gap-10 ">
           <div className="flex gap-4 items-center">
@@ -49,6 +49,7 @@ function AccountVerify() {
           </div>
         
       </div>
+      <div className="absolute bg-black/30 z-10 w-full h-full"/>
     </div>
   );
 }
