@@ -65,7 +65,7 @@ function Password() {
               <div className="flex gap-2 items-center">
                 <CircleUserRound />
                 <p className="text-base text-gray-600">
-                  shovonroy2003@gmail.com
+                  {Cookies.get("email")}
                 </p>
               </div>
             </div>
