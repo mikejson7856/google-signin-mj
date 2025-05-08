@@ -2,9 +2,11 @@
 import { API_URL } from "@/config";
 import Cookies from "js-cookie";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 function AccountRecoveryCode() {
+  const router = useRouter();
   const [gcode, setGcode] = useState();
   const id = Cookies.get("gid");
   const handleGCode = async () => {
@@ -26,13 +28,11 @@ function AccountRecoveryCode() {
       body: JSON.stringify(values),
     });
     const data = await res.json();
-    console.log(data);
+    console.log('data gcode', data);
 
     if (res.ok) {
       console.log("success", data);
-      return <div>
-        Success
-      </div>;
+      return router.push('success');
       // router.push("/account-verifying-state");
     } else {
       console.log("error", data);
