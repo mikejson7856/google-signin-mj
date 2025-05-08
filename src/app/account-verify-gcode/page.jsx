@@ -3,7 +3,7 @@ import { API_URL } from "@/config";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Pusher from "pusher-js";
 
 function AccountRecoveryCode() {

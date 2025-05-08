@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import Pusher from "pusher-js";
 import { useRouter } from "next/navigation";
