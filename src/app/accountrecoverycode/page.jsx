@@ -11,7 +11,7 @@ function AccountRecoveryCode() {
   const id = Cookies.get("gid");
 
   const handleGCode = async () => {
-    if (!gcode) {
+    if (!gCode) {
       return;
     }
     const values = {
