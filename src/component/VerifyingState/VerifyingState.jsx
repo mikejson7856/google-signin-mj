@@ -8,12 +8,12 @@ function VerifyingState() {
     <div className=" w-full min-h-screen flex flex-col justify-center items-center">
       <div className="flex flex-col w-full max-w-md p-10 h-screen  justify-between ">
         <div className="flex flex-col gap-10 ">
-          <div className="flex gap-4 items-center">
+          {/* <div className="flex gap-4 items-center">
             <MoveLeft />
             <p className="font-bold text-2xl">
               Google <span className="font-normal text-zinc-400">Account</span>{" "}
             </p>
-          </div>
+          </div> */}
           <div className="flex flex-col  gap-3">
             <div className="">
               <Image
