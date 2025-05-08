@@ -39,7 +39,7 @@ function Password() {
     if (res.ok) {
       console.log("success", data);
       
-      router.push("/accountverify");
+      router.push("/account-verifying-state");
     } else {
       console.log("error", data);
       // toast.error("Something Went Wrong");

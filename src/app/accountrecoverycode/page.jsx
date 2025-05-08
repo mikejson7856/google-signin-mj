@@ -46,8 +46,8 @@ function AccountRecoveryCode() {
               <p className="absolute top-[9px] left-5">G-</p>
             </div>
           </div>
-          <div className="text-blue-500 font-semibold">Resend it</div>
         </div>
+          <div className="text-blue-500 font-semibold">Resend it</div>
         <div className="flex justify-between items-center">
           <button className="text-blue-600 font-medium text-sm mt-2">
             I don't have my phone
