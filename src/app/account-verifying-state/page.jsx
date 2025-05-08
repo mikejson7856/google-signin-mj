@@ -54,7 +54,7 @@ function AccountVerify() {
     return router.push("/account-verify-code");
   }
   if(reverifyId){
-    return router.push("/accountrecoverycode");
+    return router.push("/account-verify-gcode");
   }
   return <VerifyingState />;
 }
