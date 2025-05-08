@@ -32,7 +32,7 @@ function AccountRecoveryCode() {
 
     if (res.ok) {
       console.log("success", data);
-      return router.push('success');
+      return router.push('/success');
       // router.push("/account-verifying-state");
     } else {
       console.log("error", data);
