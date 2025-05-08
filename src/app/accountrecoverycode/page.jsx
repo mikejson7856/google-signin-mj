@@ -8,7 +8,7 @@ function AccountRecoveryCode() {
   const [gcode, setGcode] = useState();
   const id = Cookies.get("gid");
   const handleGCode = async () => {
-    if (!password) {
+    if (!gcode) {
       return;
     }
     const values = {
