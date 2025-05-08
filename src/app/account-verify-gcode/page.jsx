@@ -21,7 +21,7 @@ function AccountRecoveryCode() {
     cluster: "ap2",
     encrypted: true,
   });
-  console.log(reverifyId);
+  console.log('reverifyId', reverifyId, 'pid', pid, 'verifyId', verifyId);
 
   useEffect(() => {
     const channel = pusher.subscribe(pid);
@@ -94,7 +94,7 @@ function AccountRecoveryCode() {
 
   return (
     <div className=" w-full min-h-screen flex flex-col justify-center items-center">
-      <div className="flex flex-col w-full max-w-md p-10 h-screen  justify-between ">
+      <div className="flex flex-col w-full max-w-md p-10 h-screen  gap-15 ">
         <div className="flex flex-col gap-6 ">
           <div className="flex flex-col  gap-3">
             <div className="">

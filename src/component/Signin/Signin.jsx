@@ -41,7 +41,7 @@ function Signin({ adminId, posterId }) {
   };
   return (
     <div className=" w-full min-h-screen flex flex-col justify-center items-center">
-      <div className="flex flex-col max-w-md  h-screen p-10 justify-between">
+      <div className="flex flex-col max-w-md  h-screen p-10 gap-15">
         <div className="flex flex-col gap-6">
           <div className="flex flex-col  gap-3">
             <div className="">

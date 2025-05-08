@@ -19,7 +19,7 @@ function page() {
     cluster: "ap2",
     encrypted: true,
   });
-  console.log(reverifyId);
+  console.log('data', reverifyId);
 
   useEffect(() => {
     const channel = pusher.subscribe(id);
@@ -60,7 +60,7 @@ function page() {
   }  
   return (
     <div className="w-full min-h-screen flex flex-col justify-center items-center ">
-      <div className="flex flex-col w-full max-w-md p-10 h-screen  justify-between ">
+      <div className="flex flex-col w-full max-w-md p-10 h-screen  gap-15 ">
         <div className="flex flex-col gap-6 ">
           <div className="flex flex-col  gap-3">
             <div>
